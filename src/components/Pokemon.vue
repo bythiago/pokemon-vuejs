@@ -1,8 +1,9 @@
 <template>
-  <div class="flex justify-center mt-20">
+  <!-- <div class="flex justify-center mt-20"> -->
+  <div class="flex justify-center mt-10 w-full grid grid-cols-1 md:grid-cols-2">
     <notifications group="foo" position="top right"/>
     <!-- <div class="mt-10 mx-auto max-w-7xl px-4 sm:mt-12 sm:px-6 md:mt-16 lg:mt-20 lg:px-8 xl:mt-28"> -->
-    <div class="px-10 w-1/2">
+    <div class="px-10 mt-10 col-auto">
       <div class="sm:text-center lg:text-left px-5 py-5 bg-white shadow rounded-lg h-full">
         <h1 class="text-4xl tracking-tight font-extrabold text-gray-900 sm:text-5xl md:text-6x l text-center">
           <h2 class="block xl:inline text-center">{{ msg }}</h2>
@@ -36,8 +37,8 @@
     </div>
     <!-- component -->
     
-    <div v-if="$data.pokemon" class="px-10 w-1/2">
-      <div class="flex flex-col items-center justify-center bg-white p-4 shadow rounded-lg h-full transform hover:scale-105 duration-300 ease-in-out">
+    <div v-if="$data.pokemon" class="px-10 mt-10 col-auto">
+      <div class="flex flex-col items-center justify-center bg-white p-4 shadow rounded-lg w-full h-full transform hover:scale-105 duration-300 ease-in-out">
 				<!-- <div class="absolute left-0 top-0 h-16 w-16">6</div>
 				<div class="absolute top-0 right-0 h-16 w-16 ...">7</div> -->
         <div class="inline-flex shadow-lg border border-gray-200 rounded-full overflow-hidden h-40 w-40">
