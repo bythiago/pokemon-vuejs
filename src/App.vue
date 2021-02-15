@@ -29,4 +29,12 @@ export default {
     -webkit-text-stroke-color: #2a75bb;
     letter-spacing: 1vh;
   }
+/*   
+  div * {
+    border: 1px solid red;
+  } */
+
+  html {
+    overflow: hidden;
+  }
 </style>
