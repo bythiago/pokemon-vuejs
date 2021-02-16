@@ -1,12 +1,12 @@
 <template>
-  <div class="container">
+  <div class="w-full">
     <div class="flex px-10 mt-10 grid grid-cols-1 md:grid-cols-2">
       <div class="w-full">
         <div class="bg-white shadow-lg rounded-lg px-4 py-6 mx-4">
           <center>
-            <img class="pt-5 object-cover md:w-24" src="https://pngimg.com/uploads/pokeball/pokeball_PNG21.png" width="100">
+            <img class="pt-5 object-cover md:w-24" src="../assets/logo.png" width="100">
           </center>
-          <h2 class="font-bold text-6xl mb-4">{{ msg }}</h2>
+          <h2 class="font-bold text-5xl mt-4">{{ msg }}</h2>
           <autocomplete
             v-if="options"
             v-model="input"
@@ -32,14 +32,14 @@
         </div>
       </div>
       <div v-if="$data.pokemon" class="w-full sm:mt-0 mt-10">
-        <div class="col-span-6 sm:col-span-6 md:col-span-3 lg:col-span-2 xl:col-span-2">
-          <div class="bg-white shadow-lg rounded-lg px-4 py-6 mx-4">
+        <div class="col-span-6 sm:col-span-6 md:col-span-3 lg:col-span-2 xl:col-span-2 h-full">
+          <div class="bg-white shadow-lg rounded-lg px-4 py-6 mx-4 h-full">
             <div class="mx-auto h-40 bg-gray-200 rounded-md ">
               <center>
                 <img v-bind:src="$data.pokemon.image" class="h-48 w-full object-cover md:w-48">
               </center>
             </div>
-            <h2 class="pt-5">{{ $data.pokemon.name }}</h2>
+            <h2 class="font-bold text-4xl mt-4 pt-5">{{ $data.pokemon.name }}</h2>
             <div class="h-2 bg-gray-200 w-64 mt-2 block mx-auto rounded-sm"></div>
             <div class="flex justify-center mt-4">
               <div 
