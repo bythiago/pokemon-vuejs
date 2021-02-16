@@ -1,84 +1,63 @@
 <template>
-  <!-- <div class="flex justify-center mt-20"> -->
-  <div class="flex justify-center mt-10 w-full grid grid-cols-1 md:grid-cols-2">
-    <notifications group="foo" position="top right"/>
-    <!-- <div class="mt-10 mx-auto max-w-7xl px-4 sm:mt-12 sm:px-6 md:mt-16 lg:mt-20 lg:px-8 xl:mt-28"> -->
-    <div class="px-10 mt-10 col-auto">
-      <div class="sm:text-center lg:text-left px-5 py-5 bg-white shadow rounded-lg h-full">
-        <h1 class="text-4xl tracking-tight font-extrabold text-gray-900 sm:text-5xl md:text-6x l text-center">
-          <h2 class="block xl:inline text-center">{{ msg }}</h2>
-        </h1>
-        <form action="#">
-          <p class="text-center"></p>
-          <div class="max-w-sm mx-auto p-1 pr-0 flex items-center">
-            <autocomplete
-              v-if="options"
-              v-model="input"
-              :source="options"
-              class="flex-1 appearance-none rounded shadow p-3 text-grey-dark mr-2 focus:outline-none"
+  <div class="container">
+    <div class="flex px-10 mt-10 grid grid-cols-1 md:grid-cols-2">
+      <div class="w-full">
+        <div class="bg-white shadow-lg rounded-lg px-4 py-6 mx-4">
+          <center>
+            <img class="pt-5 object-cover md:w-24" src="https://pngimg.com/uploads/pokeball/pokeball_PNG21.png" width="100">
+          </center>
+          <h2 class="font-bold text-6xl mb-4">{{ msg }}</h2>
+          <autocomplete
+            v-if="options"
+            v-model="input"
+            :source="options"
+            class="px-10 py-5 rounded-full">
+          </autocomplete>
+          <div class="text-center">
+            <button
+              v-on:click="buscar(input)"
+              type="button"
+              class="border border-indigo-500 bg-indigo-500 text-white rounded-md px-4 py-2 m-2 transition duration-500 ease select-none hover:bg-indigo-600 focus:outline-none focus:shadow-outline"
             >
-            </autocomplete>
+              Buscar
+            </button>
+            <button
+              v-on:click="buscar()"
+              type="button"
+              class="border border-green-500 bg-green-500 text-white rounded-md px-4 py-2 m-2 transition duration-500 ease select-none hover:bg-green-600 focus:outline-none focus:shadow-outline"
+            >
+              Aleatório
+            </button>
           </div>
-        </form>
-        <div class="mt-5 sm:mt-5 sm:flex sm:justify-center">
-          <button v-on:click="buscar(input)" class="uppercase p-3 flex items-center bg-blue-600 text-blue-50 max-w-max shadow-sm hover:shadow-lg rounded-full w-12 h-12 ">
-            <svg width="32" height="32"  viewBox="0 0 32 32" style="transform: rotate(360deg);"><path d="M29 27.586l-7.552-7.552a11.018 11.018 0 1 0-1.414 1.414L27.586 29zM4 13a9 9 0 1 1 9 9a9.01 9.01 0 0 1-9-9z" fill="currentColor"></path></svg>
-          </button>
-          <button v-on:click="buscar()" class="uppercase p-3 flex items-center bg-yellow-500 text-blue-50 max-w-max shadow-sm hover:shadow-lg rounded-full w-12 h-12 ">
-            <svg  width="32" height="32" preserveAspectRatio="xMidYMid meet" viewBox="0 0 32 32" style="transform: rotate(360deg);"><path d="M26 18A10 10 0 1 1 16 8h6.182l-3.584 3.585L20 13l6-6l-6-6l-1.402 1.414L22.185 6H16a12 12 0 1 0 12 12z" fill="currentColor"></path></svg>
-          </button>
-          <!-- <div class="rounded-md shadow">
-            <a href="#" v-on:click="buscar(input)" class="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 md:py-4 md:text-lg md:px-10">
-            Buscar
-            </a>
-          </div> -->
+        </div>
+      </div>
+      <div v-if="$data.pokemon" class="w-full sm:mt-0 mt-10">
+        <div class="col-span-6 sm:col-span-6 md:col-span-3 lg:col-span-2 xl:col-span-2">
+          <div class="bg-white shadow-lg rounded-lg px-4 py-6 mx-4">
+            <div class="mx-auto h-40 bg-gray-200 rounded-md ">
+              <center>
+                <img v-bind:src="$data.pokemon.image" class="h-48 w-full object-cover md:w-48">
+              </center>
+            </div>
+            <h2 class="pt-5">{{ $data.pokemon.name }}</h2>
+            <div class="h-2 bg-gray-200 w-64 mt-2 block mx-auto rounded-sm"></div>
+            <div class="flex justify-center mt-4">
+              <div 
+                v-for="type in $data.pokemon.types" 
+                v-bind:key="type.type.name" v-bind:style="{ 'background-color': colorType(type.type.name) }" 
+                class="rounded-sm text-white h-6 px-3 mx-1 justify-center items-center">{{type.type.name}}
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
-    <!-- component -->
-    
-    <div v-if="$data.pokemon" class="px-10 mt-10 col-auto">
-      <div class="flex flex-col items-center justify-center bg-white p-4 shadow rounded-lg w-full h-full transform hover:scale-105 duration-300 ease-in-out">
-				<!-- <div class="absolute left-0 top-0 h-16 w-16">6</div>
-				<div class="absolute top-0 right-0 h-16 w-16 ...">7</div> -->
-        <div class="inline-flex shadow-lg border border-gray-200 rounded-full overflow-hidden h-40 w-40">
-					<img v-bind:src="$data.pokemon.image" class="h-full w-full">
-				</div>
-				<h2 lang="text-center" style="font-size: 3em; position: relative; top: -3%">{{ $data.pokemon.name }}</h2>
-        <!-- <h4 class="mb-3 text-xl font-semibold tracking-tight text-gray-800">This is the title</h4> -->
-        <!-- <span class="text-grey-darker"></span> -->
-        <div class="pt-5">
-          <div v-for="type in $data.pokemon.types" v-bind:key="type.type.name" class="mx-1 inline-flex items-center bg-white leading-none rounded-full p-2 shadow text-teal text-sm" v-bind:style="{ 'background-color': colorType(type.type.name) }">
-            <span class="inline-flex text-white rounded-full h-6 px-3 justify-center items-center">
-              {{type.type.name}}
-            </span>
-          </div>
-        </div>
-				<!-- <p class="text-xs text-gray-500 text-center mt-4">
-					{{ $data.pokemon.description }}
-				</p> -->
-			</div>
-    </div>
   </div>
 </template>
-
 <script>
 
 const axios = require('axios')
-
-import Vue from 'vue';
-
-// Import component
-import Loading from 'vue-loading-overlay';
-import Notifications from 'vue-notification'
 import Autocomplete from 'vuejs-auto-complete'
-
-// Import stylesheet
-import 'vue-loading-overlay/dist/vue-loading.css';
-
-// Init plugin
-Vue.use(Loading);
-Vue.use(Notifications);
 
 export default {
   name: 'Pokemon',
@@ -144,7 +123,6 @@ export default {
         }
         
         axios.get('https://pokeapi.co/api/v2/pokemon/' + input).then((response) => {
-          //axios.get('https://pokeapi.co/api/v2/characteristic/' + response1.data.id).then(response => {
             this.loadHide(loader)
             this.pokemon = {
               id: response.data.id,
@@ -153,11 +131,6 @@ export default {
               types: response.data.types,
               description: response//response.data.descriptions[2].description
             }
-          //})
-          // .catch((error) => {
-          //   this.showNotify(error)
-          //   this.loadHide(loader)
-          // });
         })
         .catch((error) => {
           this.showNotify(error)
@@ -192,11 +165,11 @@ export default {
     }
   },
   beforeMount() {
-    console.log('//beforeMount')
+    //console.log('//beforeMount')
   },
   mounted() {
     this.buscaPokemons()
-    console.log('//mounted')
+    //console.log('//mounted')
   }
 }
 </script>

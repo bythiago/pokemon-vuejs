@@ -2,3 +2,20 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+html {
+    background-image: url('https://i.pinimg.com/originals/ca/fe/c2/cafec2809887a1c37c83d9ebbc953252.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    overflow-x: hidden;
+}
+
+h2 {
+    font-family: 'Pokemon';
+    -webkit-text-fill-color: #ffcb05; /* Will override color (regardless of order) */
+    -webkit-text-stroke-width: 2.5px;
+    -webkit-text-stroke-color: #2a75bb;
+    letter-spacing: 1vh;
+    font-size: 3vw !important;
+    text-align: center;
+  }
